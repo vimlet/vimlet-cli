@@ -3,7 +3,7 @@ var flagLong = {};
 var valueShort = {};
 var valueLong = {};
 
-var values = {};
+exports.values = {};
 
 exports.flag = function (short, long, description) {
 
@@ -45,6 +45,8 @@ exports.value = function (short, long, description, handler) {
 
 exports.process = function (args) {
 
+  var values = {};
+
   var argsArray = spaceSplit(args);
   var key;
 
@@ -54,7 +56,7 @@ exports.process = function (args) {
     if (flagShort[element]) {
       key = flagShort[element].long.replace(/^-+/g, "");
       values[key] = true;
-      
+
     }
 
     // Match long flag
@@ -67,9 +69,9 @@ exports.process = function (args) {
     if (valueShort[element]) {
       key = valueShort[element].long.replace(/^-+/g, "");
       if ((index + 1) < argsArray.length) {
-        if(valueShort[element].handler) {
+        if (valueShort[element].handler) {
           values[key] = valueShort[element].handler(argsArray[index + 1]);
-        }else {
+        } else {
           values[key] = argsArray[index + 1];
         }
       }
@@ -79,9 +81,9 @@ exports.process = function (args) {
     if (valueLong[element]) {
       key = element.replace(/^-+/g, "");
       if ((index + 1) < argsArray.length) {
-        if(valueLong[element].handler) {
+        if (valueLong[element].handler) {
           values[key] = valueLong[element].handler(argsArray[index + 1]);
-        }else {
+        } else {
           values[key] = argsArray[index + 1];
         }
       }
@@ -89,7 +91,9 @@ exports.process = function (args) {
 
   });
 
-  console.dir(values);
+  exports.values = values;
+
+  return values;
 
 };
 

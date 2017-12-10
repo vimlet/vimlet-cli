@@ -12,3 +12,5 @@ cli
 .value("o", "output", "output files")
 .value("-f", "--fruits", "fruits", handler)
 .process(test);
+
+console.dir(cli.values);
