@@ -11,7 +11,7 @@ cli
 .value("-i", "--input", "input files")
 .value("o", "output", "output files")
 .value("-f", "--fruits", "fruit list", handler)
-.process(test);
+.parse(test);
 
-// console.dir(cli.values);
+// console.dir(cli.result);
 cli.printHelp();

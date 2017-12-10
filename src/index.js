@@ -5,7 +5,7 @@ var valueShort = {};
 var valueLong = {};
 var combinedShort = {};
 
-exports.values = {};
+exports.result = {};
 
 exports.flag = function (short, long, description) {
 
@@ -57,9 +57,9 @@ exports.value = function (short, long, description, handler) {
 
 };
 
-exports.process = function (args) {
+exports.parse = function (args) {
 
-  var argsArray = spaceSplit(args);
+  var argsArray = Array.isArray(args)? args : spaceSplit(args);
   var values = {};
   var key;
 
@@ -104,7 +104,7 @@ exports.process = function (args) {
 
   });
 
-  exports.values = values;
+  exports.result = values;
   return values;
 };
 
