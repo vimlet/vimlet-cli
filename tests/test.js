@@ -10,7 +10,8 @@ cli
 .flag("-t", "--test", "test flag")
 .value("-i", "--input", "input files")
 .value("o", "output", "output files")
-.value("-f", "--fruits", "fruits", handler)
+.value("-f", "--fruits", "fruit list", handler)
 .process(test);
 
-console.dir(cli.values);
+// console.dir(cli.values);
+cli.printHelp();

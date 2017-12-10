@@ -1,7 +1,9 @@
+// Multiple index to avoid iteration
 var flagShort = {};
 var flagLong = {};
 var valueShort = {};
 var valueLong = {};
+var combinedShort = {};
 
 exports.values = {};
 
@@ -14,6 +16,12 @@ exports.flag = function (short, long, description) {
   }
 
   flagLong[long] = {
+    short: short,
+    long: long,
+    description: description
+  }
+
+  combinedShort[short] = {
     short: short,
     long: long,
     description: description
@@ -39,15 +47,20 @@ exports.value = function (short, long, description, handler) {
     handler: handler
   }
 
+  combinedShort[short] = {
+    short: short,
+    long: long,
+    description: description
+  }
+
   return exports;
 
 };
 
 exports.process = function (args) {
 
-  var values = {};
-
   var argsArray = spaceSplit(args);
+  var values = {};
   var key;
 
   argsArray.forEach(function (element, index) {
@@ -92,9 +105,18 @@ exports.process = function (args) {
   });
 
   exports.values = values;
-
   return values;
+};
 
+exports.printHelp = function() {
+  var combinedShortKeys = Object.keys(combinedShort).sort(); 
+  var element; 
+  console.log("\nSHORT: \t\t LONG: \t\t\t\t DESCRIPTION:\n")
+  combinedShortKeys.forEach(function(key){
+    element = combinedShort[key];
+    console.log(`${element.short} \t\t ${element.long} \t\t\t ${element.description}`)
+  });
+  console.log("");
 };
 
 function spaceSplit(s) {
