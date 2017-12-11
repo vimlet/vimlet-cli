@@ -1,6 +1,6 @@
-var cli = require("./../src/index");
+var cli = require("./../src/index").instantiate();
 
-var test = "test -i hello output bye -t -f apple,pear,kiwi"
+var test = "test -i hello output bye -t -f apple,pear,kiwi";
 
 function handler(value) {
   return value.split(",");
