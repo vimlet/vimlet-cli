@@ -87,9 +87,12 @@ exports.instantiate = function() {
         if ((index + 1) < argsArray.length) {
           if (valueShort[element].handler) {
             values[key] = valueShort[element].handler(argsArray[index + 1]);
-          } else {
+          } else {            
             values[key] = argsArray[index + 1];
           }
+        } else {
+          // Value type matches with a null value will be treated as flags
+          values[key] = true;
         }
       }
   
@@ -102,6 +105,9 @@ exports.instantiate = function() {
           } else {
             values[key] = argsArray[index + 1];
           }
+        } else {
+          // Value type matches with a null value will be treated as flags
+          values[key] = true;
         }
       }
   
@@ -114,10 +120,10 @@ exports.instantiate = function() {
   instance.printHelp = function() {
     var combinedShortKeys = Object.keys(instance.combined).sort(); 
     var element; 
-    console.log("\nSHORT: \t\t LONG: \t\t\t\t DESCRIPTION:\n")
+    console.log("\nSHORT: \t\t LONG: \t\t\t\t DESCRIPTION:\n");
     combinedShortKeys.forEach(function(key){
       element = instance.combined[key];
-      console.log(`${element.short} \t\t ${element.long} \t\t\t ${element.description}`)
+      console.log(`${element.short} \t\t ${element.long} \t\t\t ${element.description}`);
     });
     console.log("");
   };
