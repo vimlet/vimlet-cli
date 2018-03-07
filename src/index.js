@@ -120,10 +120,21 @@ exports.instantiate = function() {
   instance.printHelp = function() {
     var combinedShortKeys = Object.keys(instance.combined).sort(); 
     var element; 
-    console.log("\nSHORT: \t\t LONG: \t\t\t\t DESCRIPTION:\n");
+
+    var tabSize = 8;   
+    var firstPadding;
+    var secondPadding;
+
+    var shortHeader = "SHORT:" + " ".repeat((2 * tabSize) - "SHORT:".length);
+    var longHeader ="LONG:" + " ".repeat((3 * tabSize) - "LONG:".length);
+    var descriptionHeader = "DESCRIPTION:"
+
+    console.log(`\n${shortHeader}${longHeader}${descriptionHeader}\n`);
     combinedShortKeys.forEach(function(key){
       element = instance.combined[key];
-      console.log(`${element.short} \t\t ${element.long} \t\t\t ${element.description}`);
+      firstPadding =  " ".repeat((2 * tabSize) - element.short.length);
+      secondPadding =  " ".repeat((3 * tabSize) - element.long.length);    
+      console.log(`${element.short}${firstPadding}${element.long}${secondPadding}${element.description}`);
     });
     console.log("");
   };
