@@ -86,9 +86,9 @@ exports.instantiate = function() {
         key = valueShort[element].long.replace(/^-+/g, "");
         if ((index + 1) < argsArray.length) {
           if (valueShort[element].handler) {
-            values[key] = valueShort[element].handler(argsArray[index + 1]);
+            values[key] = isReserved(argsArray[index + 1]) ? true : valueShort[element].handler(argsArray[index + 1]);
           } else {            
-            values[key] = argsArray[index + 1];
+            values[key] = isReserved(argsArray[index + 1]) ? true : argsArray[index + 1];
           }
         } else {
           // Value type matches with a null value will be treated as flags
@@ -101,9 +101,9 @@ exports.instantiate = function() {
         key = element.replace(/^-+/g, "");
         if ((index + 1) < argsArray.length) {
           if (valueLong[element].handler) {
-            values[key] = valueLong[element].handler(argsArray[index + 1]);
+            values[key] = isReserved(argsArray[index + 1]) ? true : valueLong[element].handler(argsArray[index + 1]);
           } else {
-            values[key] = argsArray[index + 1];
+            values[key] = isReserved(argsArray[index + 1]) ? true : argsArray[index + 1];
           }
         } else {
           // Value type matches with a null value will be treated as flags
@@ -138,6 +138,10 @@ exports.instantiate = function() {
     });
     console.log("");
   };
+
+  function isReserved(value) {
+    return value in flagShort || value in flagLong || value in valueShort || value in valueLong;
+  }
 
   function spaceSplit(s) {
     var split = s.split(/("[^"]*"|'[^']*'|[\S]+)+/g);

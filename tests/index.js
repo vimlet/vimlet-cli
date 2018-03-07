@@ -17,4 +17,4 @@ cli
 .parse(test);
 
 console.dir(cli.result);
-cli.printHelp();
+// cli.printHelp();
