@@ -51,7 +51,7 @@ exports.instantiate = function () {
     var values = {};
     var key;
 
-    argsArray.forEach(function (element, index) { // TODO transformar los if en elseif
+    argsArray.forEach(function (element, index) { 
 
       // Match short flag
       if (flagShort[element]) {
@@ -61,13 +61,13 @@ exports.instantiate = function () {
       }
 
       // Match long flag
-      if (flagLong[element]) {
+      else if (flagLong[element]) {
         key = element.replace(/^-+/g, "");
         values[key] = true;
       }
 
       // Match short value
-      if (valueShort[element]) {
+      else if (valueShort[element]) {
         key = valueShort[element].long.replace(/^-+/g, "");
         if ((index + 1) < argsArray.length) {
           if (valueShort[element].handler) {
@@ -82,7 +82,7 @@ exports.instantiate = function () {
       }
 
       // Match long value
-      if (valueLong[element]) {
+      else if (valueLong[element]) {
         key = element.replace(/^-+/g, "");
         if ((index + 1) < argsArray.length) {
           if (valueLong[element].handler) {
