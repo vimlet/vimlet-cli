@@ -17,4 +17,21 @@ cli
 .parse(test);
 
 console.dir(cli.result);
-// cli.printHelp();
+cli.printHelp();
+
+
+console.log("------------------");
+
+
+cli
+.flag("-t", "--test", "test flag")
+.value("-i", "--input", "input files")
+.value("o", "output", "output files")
+.value(null, "--fruits", "fruit list", handler)
+.value(null, "install", "install something")
+.flag(null, "start", "start something cool")
+.flag(null, "help", "shows help")
+.parse(test);
+
+console.dir(cli.result);
+cli.printHelp();

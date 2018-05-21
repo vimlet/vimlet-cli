@@ -1,4 +1,4 @@
-exports.instantiate = function() {
+exports.instantiate = function () {
 
   var instance = {};
   instance.combined = {};
@@ -9,85 +9,70 @@ exports.instantiate = function() {
   var flagLong = {};
   var valueShort = {};
   var valueLong = {};
-    
+
   instance.flag = function (short, long, description) {
-  
-    flagShort[short] = {
+
+    var flag = {
       short: short,
       long: long,
       description: description
+    };
+
+    flagLong[long], instance.combined[long] = flag;
+    if (short && short != "") {
+      flagShort[short] = flag;
     }
-  
-    flagLong[long] = {
-      short: short,
-      long: long,
-      description: description
-    }
-  
-    instance.combined[short] = {
-      short: short,
-      long: long,
-      description: description
-    }
-  
+
     return instance;
-  
+
   };
-  
+
   instance.value = function (short, long, description, handler) {
-  
-    valueShort[short] = {
+
+    var value = {
       short: short,
       long: long,
       description: description,
       handler: handler
+    };
+
+    valueLong[long], instance.combined[long] = value;
+    if (short && short != "") {
+      valueShort[short] = value;
     }
-  
-    valueLong[long] = {
-      short: short,
-      long: long,
-      description: description,
-      handler: handler
-    }
-  
-    instance.combined[short] = {
-      short: short,
-      long: long,
-      description: description
-    }
-  
+
     return instance;
-  
+
   };
-  
+
   instance.parse = function (args) {
-  
-    var argsArray = Array.isArray(args)? args : spaceSplit(args);
+
+    var argsArray = Array.isArray(args) ? args : spaceSplit(args);
     var values = {};
     var key;
-  
-    argsArray.forEach(function (element, index) {
-  
+
+    argsArray.forEach(function (element, index) { // TODO transformar los if en elseif
+
       // Match short flag
       if (flagShort[element]) {
         key = flagShort[element].long.replace(/^-+/g, "");
         values[key] = true;
-  
+
       }
-  
+
       // Match long flag
       if (flagLong[element]) {
         key = element.replace(/^-+/g, "");
         values[key] = true;
       }
-  
+
       // Match short value
       if (valueShort[element]) {
         key = valueShort[element].long.replace(/^-+/g, "");
         if ((index + 1) < argsArray.length) {
           if (valueShort[element].handler) {
             values[key] = isReserved(argsArray[index + 1]) ? true : valueShort[element].handler(argsArray[index + 1]);
-          } else {            
+          } else {
             values[key] = isReserved(argsArray[index + 1]) ? true : argsArray[index + 1];
           }
         } else {
@@ -95,7 +80,7 @@ exports.instantiate = function() {
           values[key] = true;
         }
       }
-  
+
       // Match long value
       if (valueLong[element]) {
         key = element.replace(/^-+/g, "");
@@ -110,31 +95,32 @@ exports.instantiate = function() {
           values[key] = true;
         }
       }
-  
+
     });
-  
+
     instance.result = values;
     return values;
   };
-  
-  instance.printHelp = function() {
-    var combinedShortKeys = Object.keys(instance.combined).sort(); 
-    var element; 
 
-    var tabSize = 8;   
+  instance.printHelp = function () {
+    var combinedShortKeys = Object.keys(instance.combined).sort();
+    var element;
+
+    var tabSize = 8;
     var firstPadding;
     var secondPadding;
 
     var shortHeader = "SHORT:" + " ".repeat((2 * tabSize) - "SHORT:".length);
-    var longHeader ="LONG:" + " ".repeat((3 * tabSize) - "LONG:".length);
+    var longHeader = "LONG:" + " ".repeat((3 * tabSize) - "LONG:".length);
     var descriptionHeader = "DESCRIPTION:"
 
     console.log(`\n${shortHeader}${longHeader}${descriptionHeader}\n`);
-    combinedShortKeys.forEach(function(key){
+    combinedShortKeys.forEach(function (key) {
       element = instance.combined[key];
-      firstPadding =  " ".repeat((2 * tabSize) - element.short.length);
-      secondPadding =  " ".repeat((3 * tabSize) - element.long.length);    
-      console.log(`${element.short}${firstPadding}${element.long}${secondPadding}${element.description}`);
+      var elShort = element.short ? element.short : "";
+      firstPadding = " ".repeat((2 * tabSize) - elShort.length);
+      secondPadding = " ".repeat((3 * tabSize) - element.long.length);
+      console.log(`${elShort}${firstPadding}${element.long}${secondPadding}${element.description}`);
     });
     console.log("");
   };
@@ -157,7 +143,3 @@ exports.instantiate = function() {
   return instance;
 
 };
-
-
-
-
