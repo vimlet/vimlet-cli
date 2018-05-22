@@ -12,49 +12,54 @@ exports.instantiate = function () {
 
   instance.flag = function (short, long, description) {
 
-    flagShort[short] = {
-      short: short,
-      long: long,
-      description: description
+    if (short && short != "") {
+      flagShort[short] = {
+        short: short,
+        long: long,
+        description: description
+      }
     }
-  
+
     flagLong[long] = {
       short: short,
       long: long,
       description: description
     }
-  
-    instance.combined[short] = {
+
+    instance.combined[long] = {
       short: short,
       long: long,
       description: description
     }
-  
+
     return instance;
 
   };
 
   instance.value = function (short, long, description, handler) {
-    valueShort[short] = {
-      short: short,
-      long: long,
-      description: description,
-      handler: handler
+
+    if (short && short != "") {
+      valueShort[short] = {
+        short: short,
+        long: long,
+        description: description,
+        handler: handler
+      }
     }
-  
+
     valueLong[long] = {
       short: short,
       long: long,
       description: description,
       handler: handler
     }
-  
-    instance.combined[short] = {
+
+    instance.combined[long] = {
       short: short,
       long: long,
       description: description
     }
-  
+
     return instance;
 
   };
@@ -65,7 +70,7 @@ exports.instantiate = function () {
     var values = {};
     var key;
 
-    argsArray.forEach(function (element, index) { 
+    argsArray.forEach(function (element, index) {
 
       // Match short flag
       if (flagShort[element]) {
