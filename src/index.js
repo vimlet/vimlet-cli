@@ -12,35 +12,49 @@ exports.instantiate = function () {
 
   instance.flag = function (short, long, description) {
 
-    var flag = {
+    flagShort[short] = {
       short: short,
       long: long,
       description: description
-    };
-
-    flagLong[long], instance.combined[long] = flag;
-    if (short && short != "") {
-      flagShort[short] = flag;
     }
-
+  
+    flagLong[long] = {
+      short: short,
+      long: long,
+      description: description
+    }
+  
+    instance.combined[short] = {
+      short: short,
+      long: long,
+      description: description
+    }
+  
     return instance;
 
   };
 
   instance.value = function (short, long, description, handler) {
-
-    var value = {
+    valueShort[short] = {
       short: short,
       long: long,
       description: description,
       handler: handler
-    };
-
-    valueLong[long], instance.combined[long] = value;
-    if (short && short != "") {
-      valueShort[short] = value;
     }
-
+  
+    valueLong[long] = {
+      short: short,
+      long: long,
+      description: description,
+      handler: handler
+    }
+  
+    instance.combined[short] = {
+      short: short,
+      long: long,
+      description: description
+    }
+  
     return instance;
 
   };
