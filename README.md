@@ -1,3 +1,12 @@
+[//]: # (badges)
+
+[![license](https://vimlet.com/vimlet/VimletCli/master/docs/readme/1527098252652/license.svg?raw=true "License")](https://github.com/vimlet/VimletCli/blob/master/LICENSE)
+[![build](https://vimlet.com/vimlet/VimletCli/master/docs/readme/1527098252652/build.svg?raw=true "Build")](https://vimlet.com/downloads)
+![semver](https://vimlet.com/vimlet/VimletCli/master/docs/readme/1527098252652/semver.svg?raw=true "Semver")
+[![docs](https://vimlet.com/vimlet/VimletCli/master/docs/readme/1527098252652/docs.svg?raw=true "Docs")](https://vimlet.com/vimlet/VimletCli/master/docs/release/index.html)
+
+[//]: # (badges)
+
 # Vimlet Cli
 
 Command line interface for node.js. The easiest way to handle your application from console.
@@ -44,7 +53,8 @@ As an example call: `example w e exe` => This will set the platform as windows a
 |h|help|Print help|
 
 ## Documentation 
-WIP
+
+[vimlet cli documentation](https://vimlet.com/vimlet/VimletCli/master/docs/release/index.html)
 
 ## License
 Vimlet Cli is released under MIT License. See [LICENSE](https://github.com/vimlet/VimletCli/blob/master/LICENSE) for details.

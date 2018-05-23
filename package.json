@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "license": "MIT",
   "optionalDependencies": {
-    "@vimlet/alpha": "0.4.33"
+    "@vimlet/alpha": "0.4.34"
   },
   "scripts": {
     "doc": "alpha doc",

@@ -15,7 +15,7 @@
   "article": [
     {
       "include": [
-        "docs/md/tutorial/**/*.md"
+        "docs/md/**/*.md"
       ],
       "delete": true,
       "extension": false,

@@ -10,6 +10,7 @@ exports.instantiate = function () {
   var valueShort = {};
   var valueLong = {};
 
+  //@function flag (public) [Store flag] @param short [Shortcut] @param long [Command name] @param description [Command description]
   instance.flag = function (short, long, description) {
 
     if (short && short != "") {
@@ -36,6 +37,7 @@ exports.instantiate = function () {
 
   };
 
+  //@function value (public) [Store value] @param short [Shortcut] @param long [Command name] @param description [Command description] @param handler
   instance.value = function (short, long, description, handler) {
 
     if (short && short != "") {
@@ -64,6 +66,7 @@ exports.instantiate = function () {
 
   };
 
+  //@function parse (public) [Parse input arguments] @param args
   instance.parse = function (args) {
 
     var argsArray = Array.isArray(args) ? args : spaceSplit(args);
@@ -121,6 +124,7 @@ exports.instantiate = function () {
     return values;
   };
 
+  //@function printHelp (public) [Print help to console]
   instance.printHelp = function () {
     var combinedShortKeys = Object.keys(instance.combined).sort();
     var element;
@@ -144,10 +148,12 @@ exports.instantiate = function () {
     console.log("");
   };
 
+  //@function isReserved (private) [Check whether an argument is a reservated tag]
   function isReserved(value) {
     return value in flagShort || value in flagLong || value in valueShort || value in valueLong;
   }
 
+  //@function spaceSplit (private) [Split args into an array by spaces]
   function spaceSplit(s) {
     var split = s.split(/("[^"]*"|'[^']*'|[\S]+)+/g);
     var result = [];
