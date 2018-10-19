@@ -1,10 +1,10 @@
 {
-  "url": "https://vimlet.com/vimlet/VimletCli/master",
+  "url": "https://vimlet.com/vimlet/vimlet-cli/master",
   "badges": {
     "license": {
       "value": "MIT",
       "color": "blue",
-      "link": "https://github.com/vimlet/VimletCli/blob/master/LICENSE"
+      "link": "https://github.com/vimlet/vimlet-cli/blob/master/LICENSE"
     },
     "build": {
       "value": "passing",
@@ -18,7 +18,7 @@
     "docs": {
       "value": "documentation",
       "color": "blue",
-      "link": "https://vimlet.com/vimlet/VimletCli/master/docs/release/index.html"
+      "link": "https://vimlet.com/vimlet/vimlet-cli/master/docs/release/index.html"
     }
   },
   "output": "docs/readme",

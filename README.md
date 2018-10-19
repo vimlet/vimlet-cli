@@ -1,17 +1,17 @@
-# Vimlet Cli
+![Vimlet Cli](https://vimlet.com/resources/img/cli-txt.png)
 
 Command line interface for node.js. The easiest way to handle your application from console.
 
 ## Installation
 
-`npm install @vimlet/cli`
+`npm install @vimlet-cli`
 
 ## How to use
 
 `var cli = require("./../src/index").instantiate();`
 
 
- **vimlet/cli** accepts flags and values: 
+ **vimlet-cli** accepts flags and values: 
 * flag: Commands which don't have value, like a boolean option. `flag("shorcut", "flagName", "description")`
 * value: Commands that will have a value. `value("shorcut", "valueName", "description")`
 
@@ -45,8 +45,8 @@ As an example call: `example w e exe` => This will set the platform as windows a
 
 ## Documentation 
 
-[vimlet cli documentation](https://vimlet.com/vimlet/VimletCli/master/docs/release/index.html)
+[vimlet cli documentation](https://vimlet.com/vimlet/vimlet-cli/master/docs/release/index.html)
 
 ## License
-Vimlet Cli is released under MIT License. See [LICENSE](https://github.com/vimlet/VimletCli/blob/master/LICENSE) for details.
+Vimlet Cli is released under MIT License. See [LICENSE](https://github.com/vimlet/vimlet-cli/blob/master/LICENSE) for details.
 
