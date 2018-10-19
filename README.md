@@ -1,5 +1,5 @@
 <p align='center'>
-<img src='https://vimlet.com/resources/img/cli-txt.png' title='Vimlet Cli' alt='Vimlet Cli'>
+<img src='https://vimlet.com/resources/img/cli-txt.png' title='Vimlet Cli' alt='Vimlet Cli' height="150">
 </p>
 
 Command line interface for node.js. The easiest way to handle your application from console.
