@@ -6,11 +6,11 @@ Command line interface for node.js. The easiest way to handle your application f
 
 ## Installation
 
-`npm install @vimlet-cli`
+`npm install @vimlet/cli`
 
 ## How to use
 
-`var cli = require("./../src/index").instantiate();`
+`var cli = require("@vimlet/cli").instantiate();`
 
 
  **vimlet-cli** accepts flags and values: 
