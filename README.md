@@ -1,4 +1,6 @@
-![Vimlet Cli](https://vimlet.com/resources/img/cli-txt.png)
+<p align='center'>
+<img src='https://vimlet.com/resources/img/cli-txt.png' title='Vimlet Cli' alt='Vimlet Cli'>
+</p>
 
 Command line interface for node.js. The easiest way to handle your application from console.
 
