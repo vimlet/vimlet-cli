@@ -17,6 +17,16 @@ Command line interface for node.js. The easiest way to handle your application f
 * flag: Commands which don't have value, like a boolean option. `flag("shorcut", "flagName", "description")`
 * value: Commands that will have a value. `value("shorcut", "valueName", "description")`
 
+
+`value(shortcut, name, description, handler)`
+
+`flag(shortcut, name, description)`
+
+* shortcut: they are not mandatory, they can be null o rempty.
+* name: value or flag name.
+* description: String to be shown on help.
+* handler: a function to be applied to the data inserted by the user.
+
 IE:
 
 ```[javascript]
@@ -44,10 +54,6 @@ As an example call: `example w e exe` => This will set the platform as windows a
 |Shortcut|Name|Description|
 |---|---|---|
 |h|help|Print help|
-
-## Documentation 
-
-[vimlet cli documentation](https://vimlet.com/vimlet/vimlet-cli/master/docs/release/index.html)
 
 ## License
 Vimlet Cli is released under MIT License. See [LICENSE](https://github.com/vimlet/vimlet-cli/blob/master/LICENSE) for details.
