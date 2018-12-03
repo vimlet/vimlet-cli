@@ -1,15 +1,11 @@
 {
-  "private":true,
-  "name": "vimlet-cli",
-  "version": "0.0.1",
-  "license": "MIT",
-  "optionalDependencies": {
-    "@vimlet/alpha": "0.4.34"
+  "name": "@vimlet/cli",
+  "version": "1.2.4",
+  "description": "",
+  "main": "src/index.js",
+  "bin": {
+    "vimlet-cli": "src/index.js"
   },
-  "scripts": {
-    "doc": "alpha doc",
-    "readme": "alpha readme",
-    "readme:html": "alpha readme h",
-    "readme:centered": "alpha readme c"
-  }
+  "author": "",
+  "license": "MIT"
 }
