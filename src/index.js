@@ -70,7 +70,9 @@ exports.instantiate = function () {
   function sanitize(element) {
     if (element.match(new RegExp("^'[\\s\\S]*'$", "g"))) {
       return element.substring(1, element.length - 1);
-    } else {
+    } else if (element.match(new RegExp('^"[\\s\\S]*"$', "g"))) {
+      return element.substring(1, element.length - 1);
+    } {
       return element;
     }
   }
