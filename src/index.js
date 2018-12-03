@@ -66,14 +66,33 @@ exports.instantiate = function () {
 
   };
 
-  //@function parse (public) [Parse input arguments] @param args
+ // @function sanitize (private) [Remove extra ' in string. Issue affecting windows OS only]
+  function sanitize(element) {
+    if (element.match(new RegExp("^'[\\s\\S]*'$", "g"))) {
+      return element.substring(1, element.length - 1);
+    } else {
+      return element;
+    }
+  }
+
   instance.parse = function (args) {
 
     var argsArray = Array.isArray(args) ? args : spaceSplit(args);
+    
+    var sanitizedArgs = [];
+    argsArray.forEach(function (element) {
+      sanitizedArgs.push(sanitize(element));
+    });    
+
     var values = {};
     var key;
 
-    argsArray.forEach(function (element, index) {
+    sanitizedArgs.forEach(function (element, index) {
+      if (element[0] === "'" && element[element.length - 1] === "'") {
+        element = element.substring(1, element.length - 1);
+      } else if (element[0] === '"' && element[element.length - 1] === '"') {
+        element = element.substring(1, element.length - 1);
+      }
 
       // Match short flag
       if (flagShort[element]) {
@@ -83,38 +102,32 @@ exports.instantiate = function () {
       }
 
       // Match long flag
-      else if (flagLong[element]) {
+      if (flagLong[element]) {
         key = element.replace(/^-+/g, "");
         values[key] = true;
       }
 
       // Match short value
-      else if (valueShort[element]) {
+      if (valueShort[element]) {
         key = valueShort[element].long.replace(/^-+/g, "");
-        if ((index + 1) < argsArray.length) {
+        if ((index + 1) < sanitizedArgs.length) {
           if (valueShort[element].handler) {
-            values[key] = isReserved(argsArray[index + 1]) ? true : valueShort[element].handler(argsArray[index + 1]);
+            values[key] = valueShort[element].handler(sanitizedArgs[index + 1]);
           } else {
-            values[key] = isReserved(argsArray[index + 1]) ? true : argsArray[index + 1];
+            values[key] = sanitizedArgs[index + 1];
           }
-        } else {
-          // Value type matches with a null value will be treated as flags
-          values[key] = true;
         }
       }
 
       // Match long value
-      else if (valueLong[element]) {
+      if (valueLong[element]) {
         key = element.replace(/^-+/g, "");
-        if ((index + 1) < argsArray.length) {
+        if ((index + 1) < sanitizedArgs.length) {
           if (valueLong[element].handler) {
-            values[key] = isReserved(argsArray[index + 1]) ? true : valueLong[element].handler(argsArray[index + 1]);
+            values[key] = valueLong[element].handler(sanitizedArgs[index + 1]);
           } else {
-            values[key] = isReserved(argsArray[index + 1]) ? true : argsArray[index + 1];
+            values[key] = sanitizedArgs[index + 1];
           }
-        } else {
-          // Value type matches with a null value will be treated as flags
-          values[key] = true;
         }
       }
 
