@@ -97,10 +97,9 @@ exports.instantiate = function () {
       }
 
       // Match short flag
-      if (flagShort[element]) {
+      if (flagShort[element]) {        
         key = flagShort[element].long.replace(/^-+/g, "");
-        values[key] = true;
-
+        values[key] = true;        
       }
 
       // Match long flag
@@ -111,25 +110,29 @@ exports.instantiate = function () {
 
       // Match short value
       if (valueShort[element]) {
-        key = valueShort[element].long.replace(/^-+/g, "");
-        if ((index + 1) < sanitizedArgs.length) {
+        key = valueShort[element].long.replace(/^-+/g, "");                
+        if ((index + 1) < sanitizedArgs.length && !isReserved(sanitizedArgs[index + 1])) {
           if (valueShort[element].handler) {
             values[key] = valueShort[element].handler(sanitizedArgs[index + 1]);
           } else {
             values[key] = sanitizedArgs[index + 1];
           }
+        }else{
+          values[key] = true;
         }
       }
 
       // Match long value
       if (valueLong[element]) {
         key = element.replace(/^-+/g, "");
-        if ((index + 1) < sanitizedArgs.length) {
+        if ((index + 1) < sanitizedArgs.length && !isReserved(sanitizedArgs[index + 1])) {
           if (valueLong[element].handler) {
             values[key] = valueLong[element].handler(sanitizedArgs[index + 1]);
           } else {
             values[key] = sanitizedArgs[index + 1];
           }
+        }else{
+          values[key] = true;
         }
       }
 
