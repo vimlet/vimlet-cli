@@ -6,6 +6,15 @@
   "bin": {
     "vimlet-cli": "src/index.js"
   },
+  "scripts": { 
+    "test": "npx intern config=@ci",
+    "test:dev": "npx intern config=@dev"
+  },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@vimlet/commons-run": "0.0.9",
+    "intern": "4.4.2",
+    "express": "4.16.4"
+  }
 }

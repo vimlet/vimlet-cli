@@ -3,7 +3,7 @@ exports.instantiate = function () {
   var instance = {};
   instance.combined = {};
   instance.result = {};
-
+ 
   // Multiple index to avoid iteration
   var flagShort = {};
   var flagLong = {};
@@ -109,13 +109,13 @@ exports.instantiate = function () {
       }
 
       // Match short value
-      if (valueShort[element]) {
-        key = valueShort[element].long.replace(/^-+/g, "");                
+      if (valueShort[element]) {        
+        key = valueShort[element].long.replace(/^-+/g, "");
         if ((index + 1) < sanitizedArgs.length && !isReserved(sanitizedArgs[index + 1])) {
           if (valueShort[element].handler) {
-            values[key] = valueShort[element].handler(sanitizedArgs[index + 1]);
+            addValue(values, key, valueShort[element].handler(sanitizedArgs[index + 1]));
           } else {
-            values[key] = sanitizedArgs[index + 1];
+            addValue(values, key, sanitizedArgs[index + 1]);
           }
         }else{
           values[key] = true;
@@ -127,9 +127,9 @@ exports.instantiate = function () {
         key = element.replace(/^-+/g, "");
         if ((index + 1) < sanitizedArgs.length && !isReserved(sanitizedArgs[index + 1])) {
           if (valueLong[element].handler) {
-            values[key] = valueLong[element].handler(sanitizedArgs[index + 1]);
+            addValue(values, key, valueLong[element].handler(sanitizedArgs[index + 1]));
           } else {
-            values[key] = sanitizedArgs[index + 1];
+            addValue(values, key, sanitizedArgs[index + 1]);
           }
         }else{
           values[key] = true;
@@ -181,6 +181,22 @@ exports.instantiate = function () {
       }
     });
     return result;
+  }
+
+  // @function addValue (private) [Add value to values object]
+  function addValue(values, key, data){
+    if(!values[key]){
+      values[key] = data;
+    }else{      
+      if(Array.isArray(values[key])){
+        values[key].push(data);
+      }else{        
+        var result = [];
+        result.push(values[key]);
+        result.push(data);
+        values[key] = result;
+      }
+    }
   }
 
   return instance;

@@ -1,4 +1,4 @@
-var cli = require("./../src/index").instantiate();
+var cli = require("./../../src/index").instantiate();
 
 var test = "test -i hello output bye -t -f apple,pear,kiwi install";
 
